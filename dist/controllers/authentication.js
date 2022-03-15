@@ -16,7 +16,7 @@ class AuthController {
                 res.status(401).json({ message: info.message });
             }
             else {
-                req.user = user;
+                req.userId = user.id;
                 return next();
             }
         })(req, res, next);

@@ -37,17 +37,20 @@ const user_1 = require("../models/user");
 require("../authservice/passportHandeler");
 const passport_1 = __importDefault(require("passport"));
 class UserController {
-    constructor() {
-        this.getSignup = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    getSignup(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
             // TODO: Get signup page using svelte
             res.status(200).json({ message: "Signup page" });
         });
-        this.postSignup = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    }
+    postSignup(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
             const { username, password } = req.body;
             // check existence of user and if user already exist return error
             const existingUser = yield user_1.User.findOne({ username: username });
             if (existingUser) {
-                return res.status(409).json({ message: "User already exist" });
+                res.status(409).json({ message: "User already exist" });
+                return;
             }
             const user = new user_1.User({ username, password });
             yield user.save();
@@ -55,11 +58,15 @@ class UserController {
                 .status(201)
                 .json({ message: "User already has been created", UserId: user._id });
         });
-        this.getLogin = (req, res, next) => {
+    }
+    getLogin(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
             // TODO: Get login page using svelte
             res.status(200).json({ message: "Login page" });
-        };
-        this.postLogin = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+        });
+    }
+    postLogin(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
             passport_1.default.authenticate("local", (error, user, info) => {
                 if (error) {
                     return next(error);

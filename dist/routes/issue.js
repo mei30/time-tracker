@@ -13,6 +13,7 @@ class IssueRoutes {
     }
     routes() {
         this.router.get("/all", this.authController.authenticateJwt, this.issueController.getIssues);
+        this.router.post("/", this.authController.authenticateJwt, this.issueController.createIssue);
     }
 }
 exports.IssueRoutes = IssueRoutes;

@@ -10,10 +10,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IssueController = void 0;
+const issue_1 = require("../models/issue");
 class IssueController {
-    constructor() {
-        this.getIssues = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    getIssues(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
             res.status(200).json({ message: [] });
+        });
+    }
+    createIssue(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const issueData = req.body;
+            const issue = yield issue_1.Issue.create({
+                title: issueData.title,
+                description: issueData.description,
+                priority: issue_1.TaskPriority[issueData.priority],
+                issueType: issue_1.IssueType[issueData.issueType],
+                status: issue_1.IssueStatus[issueData.status],
+                estimatedTime: issueData.estimatedTime,
+                consumedTime: issueData.consumedTime,
+                creator: req.userId,
+            });
+            res.status(200).json({ message: "Issue has been creted", issue: issue });
         });
     }
 }

@@ -4,9 +4,10 @@ import { IVerifyOptions } from "passport-local";
 
 import "../authservice/passportHandeler";
 import { UserDocument } from "../models/user";
+import { IRequest } from "../interfaces/request";
 
 export class AuthController {
-  authenticateJwt(req: Request, res: Response, next: NextFunction) {
+  authenticateJwt(req: IRequest, res: Response, next: NextFunction) {
     passport.authenticate(
       "jwt",
       (error: Error, user: UserDocument, info: IVerifyOptions) => {
@@ -17,7 +18,7 @@ export class AuthController {
         if (!user) {
           res.status(401).json({ message: info.message });
         } else {
-            req.user = user
+            req.userId = user.id
             return next();
         }
       }

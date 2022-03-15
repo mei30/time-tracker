@@ -19,5 +19,11 @@ export class IssueRoutes {
       this.authController.authenticateJwt,
       this.issueController.getIssues
     );
+
+    this.router.post(
+      "/",
+      this.authController.authenticateJwt,
+      this.issueController.createIssue
+    );
   }
 }

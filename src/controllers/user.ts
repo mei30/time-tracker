@@ -7,27 +7,28 @@ import passport from "passport";
 import { IVerifyOptions } from "passport-local";
 
 export class UserController {
-  getSignup: RequestHandler = async (
+  public async getSignup(
     req: Request,
     res: Response,
     next: NextFunction
-  ) => {
+  ): Promise<void> {
     // TODO: Get signup page using svelte
     res.status(200).json({ message: "Signup page" });
-  };
+  }
 
-  postSignup: RequestHandler = async (
+  public async postSignup(
     req: Request,
     res: Response,
     next: NextFunction
-  ) => {
+  ): Promise<void> {
     const { username, password } = req.body as IUser;
 
     // check existence of user and if user already exist return error
     const existingUser = await User.findOne({ username: username });
 
     if (existingUser) {
-      return res.status(409).json({ message: "User already exist" });
+      res.status(409).json({ message: "User already exist" });
+      return;
     }
 
     const user = new User({ username, password });
@@ -36,18 +37,22 @@ export class UserController {
     res
       .status(201)
       .json({ message: "User already has been created", UserId: user._id });
-  };
+  }
 
-  getLogin: RequestHandler = (req, res, next) => {
-    // TODO: Get login page using svelte
-    res.status(200).json({ message: "Login page" });
-  };
-
-  postLogin: RequestHandler = async (
+  public async getLogin(
     req: Request,
     res: Response,
     next: NextFunction
-  ) => {
+  ): Promise<void> {
+    // TODO: Get login page using svelte
+    res.status(200).json({ message: "Login page" });
+  }
+
+  public async postLogin(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     passport.authenticate(
       "local",
       (error: Error, user: UserDocument, info: IVerifyOptions) => {
@@ -69,5 +74,5 @@ export class UserController {
         }
       }
     )(req, res, next);
-  };
+  }
 }
