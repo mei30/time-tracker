@@ -1,0 +1,40 @@
+{
+  "name": "time-tracker",
+  "version": "1.0.0",
+  "description": "A handy, lightweight, mobile-friendly time tracker for managing your time spent for doing various tasks ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon dist/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mei30/time-tracker.git"
+  },
+  "author": "Meisam Jafari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mei30/time-tracker/issues"
+  },
+  "homepage": "https://github.com/mei30/time-tracker#readme",
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^17.0.21",
+    "@types/passport": "^1.0.7",
+    "@types/passport-jwt": "^3.0.6",
+    "@types/passport-local": "^1.0.34",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.3",
+    "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "nodeman": "^1.1.2",
+    "nodemon": "^2.0.15"
+  }
+}
